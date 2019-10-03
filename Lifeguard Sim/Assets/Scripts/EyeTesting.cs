@@ -55,7 +55,7 @@ public class EyeTesting : MonoBehaviour
     {
         Vector2 gazePoint = TobiiAPI.GetGazePoint().Screen; // Get where player is looking in viewport coordinates
 
-        smoothPoint = Vector2.Lerp(smoothPoint, gazePoint, 0.5f); // Smoothing player's gaze point
+        smoothPoint = Vector2.Lerp(smoothPoint, gazePoint, 0.5f); // Smoaffothing player's gaze point
 
         gazePosImage.transform.position = new Vector3(smoothPoint.x, smoothPoint.y, 0f);
     }
