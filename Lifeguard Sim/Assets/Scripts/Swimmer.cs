@@ -56,7 +56,6 @@ public class Swimmer : Character // The main NPC that the player will have to sa
         }
 
         Debug.Log(swimmerCondition);
-        Debug.Log(randCondition);
     }
 
     // Update is called once per frame
