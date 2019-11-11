@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Swimmer : Character // The main NPC that the player will have to save
 {
@@ -13,9 +14,15 @@ public class Swimmer : Character // The main NPC that the player will have to sa
     }
 
     Condition swimmerCondition;
+    NavMeshAgent agent;
+    
 
-    public override void Move()
+    public override void Move(Vector3 dest) // Setting the swimmer to move via navmesh agent
     {
+        if(!agent.hasPath)
+        {
+            agent.SetDestination(dest);
+        }
 
     }
 
@@ -27,6 +34,7 @@ public class Swimmer : Character // The main NPC that the player will have to sa
     // Start is called before the first frame update
     void Start()
     {
+        InitComponents(); // Assigns components
         InitSwimmerCond(); // Gives swimmer a random condition upon being created
     }
 
@@ -62,6 +70,11 @@ public class Swimmer : Character // The main NPC that the player will have to sa
 
         Debug.Log(swimmerCondition);
         Debug.Log(randCondition);
+    }
+
+    void InitComponents()
+    {
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame

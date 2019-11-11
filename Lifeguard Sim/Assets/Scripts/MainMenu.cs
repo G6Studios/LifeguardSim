@@ -32,7 +32,7 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerPrefs.SetInt("toggleWarning", Converters.BoolToInt(toggle.isOn));
+        PlayerPrefs.SetInt("toggleWarning", Converters.BoolToInt(true));
     }
 
     public void StartGame()
