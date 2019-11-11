@@ -16,14 +16,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // Not needed with mainmenu script
-        //DontDestroyOnLoad(this); // GameManager should persist in between scenes
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        SpawnSwimmers();
     }
 
     // Update is called once per frame
@@ -43,12 +36,14 @@ public class GameManager : MonoBehaviour
 
     private void SpawnSwimmers()
     {
-        if(!swimmersSpawned)
+        if (!swimmersSpawned)
         {
-            for(int i = 0; i < 30; i++)
+            for (int i = 0; i < 10; i++)
             {
-                Vector3 random = new Vector3(Random.Range(-5, 5), 0f, Random.Range(-5, 5));
+                Vector3 random = new Vector3(Random.Range(-5, 5), 0f, Random.Range(-5, 5)); // Random spawn location
+
                 Instantiate(swimmer, random, Quaternion.identity);
+
             }
         }
 
