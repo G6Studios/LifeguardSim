@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Swimmer : Character // The main NPC that the player will have to save
 {
-    private enum Condition
+    public enum Condition
     {
         Normal,
         WeakSwimmer,
@@ -13,22 +13,21 @@ public class Swimmer : Character // The main NPC that the player will have to sa
         BrokenBone
     }
 
-    Condition swimmerCondition;
+    private Condition swimmerCondition;
     NavMeshAgent agent;
-    
+    public bool agentActive = true; // Boolean for whether agent should move around
+
 
     public override void Move(Vector3 dest) // Setting the swimmer to move via navmesh agent
     {
-        if(!agent.hasPath)
-        {
-            agent.SetDestination(dest);
-        }
+
+        agent.SetDestination(dest);
 
     }
 
     public override void SetFlag()
     {
-        
+
     }
 
     // Start is called before the first frame update
@@ -40,7 +39,7 @@ public class Swimmer : Character // The main NPC that the player will have to sa
 
     private void InitSwimmerCond()
     {
-        Random.InitState(System.Environment.TickCount); // Used for RNG seed as Random.seed is deprecated
+        // Random.initstate was removed due to not playing nicely with instantiation of gameobjects
         int randCondition = Random.Range(1, 101); // Random number between 1 and 100
 
         if (randCondition >= 1 && randCondition <= 49) // 50% chance to be normal
@@ -68,18 +67,44 @@ public class Swimmer : Character // The main NPC that the player will have to sa
             Debug.LogError("Error generating random condition."); // Failsafe
         }
 
-        Debug.Log(swimmerCondition);
-        Debug.Log(randCondition);
+        //Debug.Log(swimmerCondition);
+        //Debug.Log(randCondition);
+    }
+
+    public bool ToggleAgent() // Toggle on/off state of navmesh agent
+    {
+        if (agent.enabled) // If agent is enabled, set to disabled
+        {
+            agent.enabled = false;
+            return false;
+
+        }
+
+        else // Else set agent to enabled
+        {
+            agent.enabled = true;
+            return true;
+        }
+
+
+
+
+    }
+
+    public string GetCondition()
+    {
+        return swimmerCondition.ToString();
     }
 
     void InitComponents()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.avoidancePriority = Random.Range(0, 100); // Having this randomized helps prevent agents getting stuck on each other
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
