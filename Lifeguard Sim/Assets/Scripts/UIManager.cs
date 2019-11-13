@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
 
     TextMeshProUGUI test;
+    TextMeshProUGUI timerText;
     SwimmerManager s_manager;
     public GameObject diagnosisOptions;
 
@@ -16,6 +17,7 @@ public class UIManager : MonoBehaviour
     {
         s_manager = GameObject.Find("Game Core").GetComponent<SwimmerManager>();
         test = GameObject.Find("Normal Swimmers").GetComponent<TextMeshProUGUI>();
+        timerText = GameObject.Find("Timer Text").GetComponent<TextMeshProUGUI>();
         diagnosisOptions.SetActive(false);
     }
 
@@ -23,6 +25,11 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         SwimmersText();
+    }
+
+    public void TimerText(string text)
+    {
+        timerText.text = text;
     }
 
 

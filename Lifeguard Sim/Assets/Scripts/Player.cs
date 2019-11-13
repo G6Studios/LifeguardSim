@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
 
     public void DiagnoseSwimmer(string condition)
     {
-        if(grabbedSwimmer.GetComponent<Swimmer>().GetCondition() == condition)
+        if(grabbedSwimmer.transform.parent.GetComponent<Swimmer>().GetCondition() == condition)
         {
             Debug.Log("Correct.");
 
