@@ -37,8 +37,6 @@ public class EyeTracking : MonoBehaviour
     void Update()
     {
         trackerConnected = TobiiAPI.IsConnected; // Status of tobii eye tracker
-
-
         
         if(trackerConnected) // Tracker is connected and functioning properly
         {
@@ -64,6 +62,12 @@ public class EyeTracking : MonoBehaviour
 
     }
 
+    public GameObject GetGazeTarget()
+    {
+        GameObject temp = TobiiAPI.GetFocusedObject(); // Since the bigger gazeaware hitboxes are children of the actual objects we want, we need the parent gameobject
+        return temp;
+    }
+
     private void ProcessTracking() // Function for updating eye tracking for player
     {
         Vector2 gazePoint = TobiiAPI.GetGazePoint().Screen; // Get where player is looking in viewport coordinates
@@ -71,6 +75,7 @@ public class EyeTracking : MonoBehaviour
         smoothPoint = Vector2.Lerp(smoothPoint, gazePoint, 0.5f); // Smoothing player's gaze point
 
         gazePosImage.transform.position = new Vector3(smoothPoint.x, smoothPoint.y, 0f); // Updating sprite position to where player is looking
+
     }
 
     private void ProcessUserPresence()

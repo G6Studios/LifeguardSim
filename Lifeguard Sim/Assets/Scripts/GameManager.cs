@@ -9,29 +9,31 @@ public class GameManager : MonoBehaviour
 
     public bool displayTrackerWarning;
 
+    public float timerMax = 30f;
+
+    public float gameTimer; // Timer for how long the user has left
+
     // Pause menu related
     private bool gamePaused = false; // If the game was manually paused by the user
 
     private bool swimmersSpawned = false;
+
+    public UIManager ui_manager;
 
     private void Awake()
     {
         SpawnSwimmers();
     }
 
+    void Start()
+    {
+        gameTimer = timerMax;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        // Not needed with mainmenu script
-        //if (SceneManager.GetActiveScene().name.Equals("Main Menu")) // Main menu scene
-        //{
-        //
-        //}
-        //
-        //else if(SceneManager.GetActiveScene().name.Equals("Swimming Pool"))
-        //{
-        //    SpawnSwimmers();
-        //}
+        UpdateTimer();
     }
 
     private void SpawnSwimmers()
@@ -50,9 +52,30 @@ public class GameManager : MonoBehaviour
         swimmersSpawned = true;
     }
 
-    public void StartScene()
+    public void UpdateTimer()
     {
-        SceneManager.LoadScene("Swimming Pool");
+        gameTimer = Mathf.Clamp(gameTimer - Time.deltaTime, 0f, timerMax); // Time ticking down
+
+        // Formatting time into minutes and seconds
+        string minutes = Mathf.Floor(gameTimer / 60).ToString("00");
+        string seconds = (gameTimer % 60).ToString("00");
+
+        string formattedTime = string.Format("{0}:{1}", minutes, seconds); // Formatted time for easy access
+
+        ui_manager.TimerText(formattedTime);
+
+        if(gameTimer <= 0f)
+        {
+            GameOver();
+
+        }
+
+    }
+
+    void GameOver()
+    {
+        SceneManager.LoadScene("Results");
+
     }
 
     private void ProcessPause(bool trackerStatus, bool userStatus)

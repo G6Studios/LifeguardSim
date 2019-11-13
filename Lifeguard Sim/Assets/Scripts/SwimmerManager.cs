@@ -8,12 +8,18 @@ public class SwimmerManager : MonoBehaviour
     public List<GameObject> swimmers; // List of swimmers in scene
     public List<Transform> swimPoints; // Points where swimmers will navigate to via NavMesh
 
+    public int normalSwimmers; // Number of normal swimmers
+    public int weakSwimmers; // Number of weak swimmers
+    public int exhaustedSwimmers; // Number of exhausted swimmers
+    public int injuredSwimmers; // Number of swimmers with broken bones
+
 
     // Start is called before the first frame update
     void Start()
     {
         InitSwimPoints();
         InitSwimmers();
+        ClassifySwimmers();
 
     }
 
@@ -34,6 +40,37 @@ public class SwimmerManager : MonoBehaviour
         for (int i = 0; i < temp.Length; i++)
         {
             swimmers.Add(temp[i]);
+
+        }
+    }
+
+    // Classifying swimmers as normal, weak, exhausted, or injured
+    void ClassifySwimmers()
+    {
+        for (int i = 0; i < swimmers.Count; i++)
+        {
+            if (swimmers[i].GetComponent<Swimmer>().GetCondition().Equals(Swimmer.Condition.Normal))
+            {
+                normalSwimmers++;
+            }
+
+            else if (swimmers[i].GetComponent<Swimmer>().GetCondition().Equals(1))
+            {
+                weakSwimmers++;
+            }
+
+            else if (swimmers[i].GetComponent<Swimmer>().GetCondition().Equals(2))
+            {
+                exhaustedSwimmers++;
+            }
+
+            else if (swimmers[i].GetComponent<Swimmer>().GetCondition().Equals(3))
+            {
+                injuredSwimmers++;
+            }
+
+
+
         }
     }
 
@@ -41,9 +78,9 @@ public class SwimmerManager : MonoBehaviour
     {
         for (int i = 0; i < swimmers.Count; i++)
         {
-            if (!swimmers[i].GetComponent<NavMeshAgent>().hasPath)
+            if (PathComplete(swimmers[i].GetComponent<NavMeshAgent>()))
             {
-                swimmers[i].GetComponent<Swimmer>().Move(swimPoints[Random.Range(0, 4)].transform.position);
+                swimmers[i].GetComponent<Swimmer>().Move(swimPoints[Random.Range(0, swimPoints.Count)].transform.position);
 
             }
 
@@ -55,4 +92,28 @@ public class SwimmerManager : MonoBehaviour
     {
         MoveSwimmers(); // TODO: Limiting conditions (this should not be called every frame)
     }
+
+
+    // Function for testing if navmesh agent has reached destination
+    bool PathComplete(NavMeshAgent swimmer)
+    {
+        if (swimmer.enabled) // Making sure the component is enabled
+        {
+            if (!swimmer.pathPending) // If agent doesn't have a path pending
+            {
+                if (swimmer.remainingDistance <= swimmer.stoppingDistance) // If the remaining path distance is less than or equal to the agent's stopping distance
+                {
+                    if (!swimmer.hasPath || swimmer.velocity.sqrMagnitude == 0) // If the agent no longer has a path or has come to a complete stop
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false; // If any of the conditions are not true, path is not complete
+        }
+
+        return false; // Path can't be complete if the component isn't enabled 
+
+    }
+
 }
