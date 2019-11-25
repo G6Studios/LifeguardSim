@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -25,13 +23,13 @@ public class GameManager : MonoBehaviour
         SpawnSwimmers();
     }
 
-    void Start()
+    private void Start()
     {
         gameTimer = timerMax;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         UpdateTimer();
     }
@@ -45,7 +43,6 @@ public class GameManager : MonoBehaviour
                 Vector3 random = new Vector3(Random.Range(-5, 5), 0f, Random.Range(-5, 5)); // Random spawn location
 
                 Instantiate(swimmer, random, Quaternion.identity);
-
             }
         }
 
@@ -64,18 +61,15 @@ public class GameManager : MonoBehaviour
 
         ui_manager.TimerText(formattedTime);
 
-        if(gameTimer <= 0f)
+        if (gameTimer <= 0f)
         {
             GameOver();
-
         }
-
     }
 
-    void GameOver()
+    private void GameOver()
     {
         SceneManager.LoadScene("Results");
-
     }
 
     private void ProcessPause(bool trackerStatus, bool userStatus)

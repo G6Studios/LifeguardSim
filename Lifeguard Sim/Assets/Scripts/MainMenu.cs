@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,24 +11,22 @@ public class MainMenu : MonoBehaviour
     public GameObject buttons;
     public GameObject options;
     public GameObject optionButtons;
-    Toggle toggle;
+    private Toggle toggle;
 
-    bool optionsVisible = false;
+    private bool optionsVisible = false;
 
     private void Awake()
     {
-        
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         toggle = optionButtons.GetComponentInChildren<Toggle>();
-        
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         PlayerPrefs.SetInt("toggleWarning", Converters.BoolToInt(true));
     }
@@ -42,17 +38,16 @@ public class MainMenu : MonoBehaviour
 
     public void ShowOptions()
     {
-        if(optionsVisible == false)
+        if (optionsVisible == false)
         {
             menuAnims.Play("ShowOptions");
             optionsVisible = true;
-
         }
     }
 
     public void HideOptions()
     {
-        if(optionsVisible == true)
+        if (optionsVisible == true)
         {
             menuAnims.Play("HideOptions");
             optionsVisible = false;

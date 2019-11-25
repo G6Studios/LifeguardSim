@@ -18,5 +18,3 @@ public static class Converters
             return false;
     }
 }
-
-
