@@ -46,6 +46,6 @@ public class EyeTrackingTarget : MonoBehaviour
 
         gazeTimer = Mathf.Clamp(gazeTimer, 0.0f, gazeThreshold); // Make sure value does not go out of bounds
 
-        objectMaterial.material.SetColor("_BaseColor", Color.Lerp(Color.blue, Color.red, gazeTimer));
+        objectMaterial.material.SetColor("_BaseColor", Color.Lerp(Color.white, Color.red, gazeTimer));
     }
 }
