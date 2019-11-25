@@ -1,38 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    SwimmerManager s_manager;
-    UIManager uIManager;
-    EyeTracking tracker;
+    private SwimmerManager s_manager;
+    private UIManager uIManager;
+    private EyeTracking tracker;
 
-    Vector3 diagnosisPoint;
-    Vector3 cameraDiagnosisPoint;
-    Camera sceneCamera;
+    private Vector3 diagnosisPoint;
+    private Vector3 cameraDiagnosisPoint;
+    private Camera sceneCamera;
 
     private GameObject gazeTarget;
 
-    GameObject grabbedSwimmer;
-
+    private GameObject grabbedSwimmer;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         s_manager = gameObject.GetComponent<SwimmerManager>();
         uIManager = GameObject.FindObjectOfType<UIManager>();
         tracker = gameObject.GetComponent<EyeTracking>();
         diagnosisPoint = GameObject.Find("Diagnosis Point").GetComponent<Transform>().position;
-        cameraDiagnosisPoint = GameObject.Find("Camera Diagnosis Point").GetComponent<Transform>().position; 
+        cameraDiagnosisPoint = GameObject.Find("Camera Diagnosis Point").GetComponent<Transform>().position;
         sceneCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
-
-
-
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -40,11 +34,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    void GrabSwimmer()
+    private void GrabSwimmer()
     {
         if (tracker.GetGazeTarget() != null) // To prevent errors
         {
-
             grabbedSwimmer = tracker.GetGazeTarget();
             if (grabbedSwimmer.transform.parent.tag.Equals("Swimmer")) // Check if the player is looking at a swimmer
             {
@@ -56,29 +49,23 @@ public class Player : MonoBehaviour
                     uIManager.diagnosisOptions.SetActive(true); // Open diagnosis menu in UImanager
                     Debug.Log("Gotcha");
                 }
-
                 else
                 {
                     Debug.Log("You must stare at the swimmer longer!");
                 }
-
             }
         }
     }
 
     public void DiagnoseSwimmer(string condition)
     {
-        if(grabbedSwimmer.transform.parent.GetComponent<Swimmer>().GetCondition() == condition)
+        if (grabbedSwimmer.transform.parent.GetComponent<Swimmer>().GetCondition() == condition)
         {
             Debug.Log("Correct.");
-
         }
-
         else
         {
             Debug.Log("Wrong.");
-
         }
-
     }
 }

@@ -1,19 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-
-    TextMeshProUGUI test;
-    TextMeshProUGUI timerText;
-    SwimmerManager s_manager;
+    private TextMeshProUGUI test;
+    private TextMeshProUGUI timerText;
+    private SwimmerManager s_manager;
     public GameObject diagnosisOptions;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         s_manager = GameObject.Find("Game Core").GetComponent<SwimmerManager>();
         test = GameObject.Find("Normal Swimmers").GetComponent<TextMeshProUGUI>();
@@ -22,7 +18,7 @@ public class UIManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         SwimmersText();
     }
@@ -32,12 +28,8 @@ public class UIManager : MonoBehaviour
         timerText.text = text;
     }
 
-
-    void SwimmersText()
+    private void SwimmersText()
     {
-
         test.text = "Normal swimmers: " + s_manager.normalSwimmers;
-
-
     }
 }
