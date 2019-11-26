@@ -12,6 +12,7 @@ public class SwimmerManager : MonoBehaviour
     public int exhaustedSwimmers; // Number of exhausted swimmers
     public int injuredSwimmers; // Number of swimmers with broken bones
 
+
     // Start is called before the first frame update
     private void Start()
     {

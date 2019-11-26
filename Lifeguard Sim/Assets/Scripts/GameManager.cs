@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public playerstats statistics;
+
     public GameObject swimmer; // Test variable
 
     public bool displayTrackerWarning;
@@ -26,12 +28,18 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         gameTimer = timerMax;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     // Update is called once per frame
     private void Update()
     {
         UpdateTimer();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        statistics.resetStatistics();
     }
 
     private void SpawnSwimmers()

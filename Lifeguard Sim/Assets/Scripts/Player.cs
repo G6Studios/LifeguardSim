@@ -2,6 +2,9 @@
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    playerstats statistics;
+
     private SwimmerManager s_manager;
     private UIManager uIManager;
     private EyeTracking tracker;
@@ -61,10 +64,12 @@ public class Player : MonoBehaviour
     {
         if (grabbedSwimmer.transform.parent.GetComponent<Swimmer>().GetCondition() == condition)
         {
+            statistics.playerCorrectAnswer++;
             Debug.Log("Correct.");
         }
         else
         {
+            statistics.playerWrongAnswer++;
             Debug.Log("Wrong.");
         }
     }
