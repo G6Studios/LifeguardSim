@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerstats : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class playerstats : MonoBehaviour
     public int playerCorrectAnswer = 0;
     public int playerWrongAnswer = 0;
 
+    public bool reset = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,17 @@ public class playerstats : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    private void Update()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        string activeScene = currentScene.name;
+        if(activeScene == "Swimming Pool" && reset == false)
+        {
+            resetStatistics();
+            reset = true;
+        }
+
+    }
 
     public void resetStatistics()
     {

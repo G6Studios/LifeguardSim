@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     {
         
         gameTimer = timerMax;
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        statistics.reset = false;
     }
 
     // Update is called once per frame
@@ -38,10 +38,6 @@ public class GameManager : MonoBehaviour
         UpdateTimer();
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        statistics.resetStatistics();
-    }
 
     private void SpawnSwimmers()
     {

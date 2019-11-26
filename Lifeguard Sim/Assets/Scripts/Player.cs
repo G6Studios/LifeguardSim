@@ -81,6 +81,7 @@ public class Player : MonoBehaviour
             Debug.Log("Wrong.");
         }
 
+        uIManager.diagnosisOptions.SetActive(false); // Open diagnosis menu in UImanager
         sceneCamera.transform.SetPositionAndRotation(cameraStartPoint, Quaternion.identity); // Teleport camera back to watchtower point
         sceneCamera.transform.Rotate(33, 0, 0); // Rotate camera back to initial position
         grabbedSwimmer.transform.parent.GetComponent<Swimmer>().isGrabbed = false; // Ungrab swimmer
