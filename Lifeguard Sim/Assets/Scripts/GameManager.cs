@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        
         gameTimer = timerMax;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }

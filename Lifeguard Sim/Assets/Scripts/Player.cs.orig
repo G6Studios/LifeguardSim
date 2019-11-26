@@ -70,14 +70,20 @@ public class Player : MonoBehaviour
     {
         if (grabbedSwimmer.transform.parent.GetComponent<Swimmer>().GetCondition() == condition)
         {
+<<<<<<< HEAD
             statistics.playerCorrectAnswer++;
+=======
             grabbedSwimmer.transform.parent.GetComponent<Transform>().SetPositionAndRotation(hell, Quaternion.identity); // Teleport swimmer to hell
+>>>>>>> loose-ends
             Debug.Log("Correct.");
         }
         else
         {
+<<<<<<< HEAD
             statistics.playerWrongAnswer++;
+=======
             grabbedSwimmer.transform.parent.GetComponent<Transform>().SetPositionAndRotation(s_manager.swimPoints[0].position, Quaternion.identity); // Teleport swimmer back into pool
+>>>>>>> loose-ends
             Debug.Log("Wrong.");
         }
 

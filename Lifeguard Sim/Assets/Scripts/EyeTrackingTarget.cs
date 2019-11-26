@@ -1,5 +1,6 @@
 ﻿using Tobii.Gaming; // Tobii library
 using UnityEngine;
+using TMPro;
 
 public class EyeTrackingTarget : MonoBehaviour
 {
@@ -7,12 +8,15 @@ public class EyeTrackingTarget : MonoBehaviour
      * Use invisible material on mesh that represents hitbox, attach bigger hitbox as child to parent object
      * ALSO DON'T FORGET TO SET COLLISION LAYER TO EyeTracking!!!
      */
-
+    [SerializeField]
+    private Swimmer swimmer;
     private GazeAware aware; // Component for checking if object has gaze focus
     public Renderer objectMaterial; // Testing component
     private float gazeThreshold = 1.5f;
     private float gazeTimer;
     private float shiftPercentage;
+    private TextMeshPro symptomText;
+    public bool colorFader;
 
     // Start is called before the first frame update
     private void Start()
@@ -44,8 +48,37 @@ public class EyeTrackingTarget : MonoBehaviour
             gazeTimer -= Time.deltaTime / gazeThreshold; // Decrement timer otherwise
         }
 
-        gazeTimer = Mathf.Clamp(gazeTimer, 0.0f, gazeThreshold); // Make sure value does not go out of bounds
+        if(colorFader)
+        {
+            gazeTimer = Mathf.Clamp(gazeTimer, 0.0f, gazeThreshold); // Make sure value does not go out of bounds
 
-        objectMaterial.material.SetColor("_BaseColor", Color.Lerp(Color.white, Color.red, gazeTimer));
+            objectMaterial.material.SetColor("_BaseColor", Color.Lerp(Color.white, Color.red, gazeTimer)); // Object material becomes more red as player looks at it
+        }
+
+        else
+        {
+            symptomText = GetComponentInChildren<TextMeshPro>();
+            if (swimmer.GetCondition().Equals("Normal"))
+            {
+                symptomText.text = "Nothing seems to be wrong with him...";
+            }
+            else if (swimmer.GetCondition().Equals("WeakSwimmer"))
+            {
+                symptomText.text = "He doesn't look like a very strong swimmer";
+            }
+            else if (swimmer.GetCondition().Equals("Exhausted"))
+            {
+                symptomText.text = "He is out of breath and looks very tired";
+            }
+            else if (swimmer.GetCondition().Equals("BrokenBone"))
+            {
+                symptomText.text = "Looks like his leg is broken";
+            }
+
+            gazeTimer = Mathf.Clamp(gazeTimer, 0.0f, gazeThreshold); // Make sure value does not go out of bounds
+
+            symptomText.color = Color.Lerp(new Color(1f, 1f, 1f, 0f), new Color(1f, 1f, 1f, 1f), gazeTimer);
+        }
+        
     }
 }
