@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
     public GameObject swimmer; // Test variable
 
     public bool displayTrackerWarning;
@@ -25,7 +26,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        
         gameTimer = timerMax;
+
     }
 
     // Update is called once per frame

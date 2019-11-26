@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 
     private Vector3 diagnosisPoint;
     private Vector3 cameraDiagnosisPoint;
+    private Vector3 cameraStartPoint;
+    private Vector3 hell; // Where discarded swimmers go
     private Camera sceneCamera;
 
     private GameObject gazeTarget;
@@ -22,6 +24,8 @@ public class Player : MonoBehaviour
         tracker = gameObject.GetComponent<EyeTracking>();
         diagnosisPoint = GameObject.Find("Diagnosis Point").GetComponent<Transform>().position;
         cameraDiagnosisPoint = GameObject.Find("Camera Diagnosis Point").GetComponent<Transform>().position;
+        cameraStartPoint = GameObject.Find("Camera Start Point").GetComponent<Transform>().position;
+        hell = GameObject.Find("Hell").GetComponent<Transform>().position;
         sceneCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
     }
 
@@ -43,9 +47,11 @@ public class Player : MonoBehaviour
             {
                 if (grabbedSwimmer.GetComponent<EyeTrackingTarget>().GazeTimer() >= 0.6f) // If the player has been looking at the swimmer sufficiently long
                 {
+                    grabbedSwimmer.transform.parent.GetComponent<Swimmer>().isGrabbed = true;
                     grabbedSwimmer.transform.parent.GetComponent<Swimmer>().ToggleAgent(); // Turn off swimmer's navmesh agent
                     grabbedSwimmer.transform.parent.GetComponent<Transform>().SetPositionAndRotation(diagnosisPoint, Quaternion.identity); // Teleport swimmer to diagnosis point
                     sceneCamera.transform.SetPositionAndRotation(cameraDiagnosisPoint, Quaternion.identity); // Teleport camera to diagnosis point
+                    sceneCamera.transform.Rotate(90, 0, 0);
                     uIManager.diagnosisOptions.SetActive(true); // Open diagnosis menu in UImanager
                     Debug.Log("Gotcha");
                 }
@@ -61,11 +67,17 @@ public class Player : MonoBehaviour
     {
         if (grabbedSwimmer.transform.parent.GetComponent<Swimmer>().GetCondition() == condition)
         {
+            grabbedSwimmer.transform.parent.GetComponent<Transform>().SetPositionAndRotation(hell, Quaternion.identity); // Teleport swimmer to hell
             Debug.Log("Correct.");
         }
         else
         {
+            grabbedSwimmer.transform.parent.GetComponent<Transform>().SetPositionAndRotation(s_manager.swimPoints[0].position, Quaternion.identity); // Teleport swimmer back into pool
             Debug.Log("Wrong.");
         }
+
+        sceneCamera.transform.SetPositionAndRotation(cameraStartPoint, Quaternion.identity); // Teleport camera back to watchtower point
+        sceneCamera.transform.Rotate(33, 0, 0); // Rotate camera back to initial position
+        grabbedSwimmer.transform.parent.GetComponent<Swimmer>().isGrabbed = false; // Ungrab swimmer
     }
 }
