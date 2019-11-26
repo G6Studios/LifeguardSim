@@ -1703,37 +1703,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diagnosisOptions: {fileID: 1119511105}
---- !u!1 &1025794954 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 704805175471835411, guid: 421fb133020391b4e80284a5e17383ac,
+--- !u!114 &1025794955 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1025794955, guid: 421fb133020391b4e80284a5e17383ac,
     type: 3}
   m_PrefabInstance: {fileID: 704805176298197844}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1025794955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025794954}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb4db453fb8fd084e9b5a8e27dbea7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swimmers: []
-  swimPoints: []
-  normalSwimmers: 0
-  weakSwimmers: 0
-  exhaustedSwimmers: 0
-  injuredSwimmers: 0
---- !u!114 &1025794959
+--- !u!114 &1025794959 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1025794959, guid: 421fb133020391b4e80284a5e17383ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 704805176298197844}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025794954}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29eb2ad2385f0404f9fa33008a5b1a30, type: 3}
@@ -2002,6 +1990,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1119511105}
   m_CullTransparentMesh: 0
+--- !u!1 &1172980296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1172980298}
+  - component: {fileID: 1172980297}
+  m_Layer: 0
+  m_Name: Playerstats
+  m_TagString: PlayerStats
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1172980297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172980296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 060e7bee97ce30e4e8670a31efea9a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info: {fileID: 1025794955}
+  normalSwimmers: 0
+  weakSwimmers: 0
+  exhaustedSwimmers: 0
+  injuredSwimmers: 0
+  playerCorrectAnswer: 0
+  playerWrongAnswer: 0
+--- !u!4 &1172980298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172980296}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.2133713, y: -4.5311813, z: 1.8187857}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1185838780
 GameObject:
   m_ObjectHideFlags: 0
@@ -3352,15 +3390,18 @@ PrefabInstance:
       objectReference: {fileID: 1075117594}
     - target: {fileID: 704805175471835420, guid: 421fb133020391b4e80284a5e17383ac,
         type: 3}
-      propertyPath: swimmer
+      propertyPath: statistics
       value: 
-      objectReference: {fileID: 302901561517809881, guid: b6c256594879fd04f806d0f7de802de8,
-        type: 3}
+      objectReference: {fileID: 1172980297}
     - target: {fileID: 704805175471835420, guid: 421fb133020391b4e80284a5e17383ac,
         type: 3}
       propertyPath: ui_manager
       value: 
       objectReference: {fileID: 1008659553}
+    - target: {fileID: 1025794959, guid: 421fb133020391b4e80284a5e17383ac, type: 3}
+      propertyPath: statistics
+      value: 
+      objectReference: {fileID: 1172980297}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 421fb133020391b4e80284a5e17383ac, type: 3}
 --- !u!1001 &8247211954100297326

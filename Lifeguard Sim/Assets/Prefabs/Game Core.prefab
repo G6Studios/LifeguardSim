@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 704805175471835422}
   - component: {fileID: 704805175471835421}
   - component: {fileID: 704805175471835420}
+  - component: {fileID: 1025794955}
+  - component: {fileID: 1025794959}
   m_Layer: 0
   m_Name: Game Core
-  m_TagString: Untagged
+  m_TagString: GameCore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,5 +62,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71976d16adf1b7408786e3ae62def10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swimmer: {fileID: 1438112539438270642, guid: 595d83f4e8b4dbe4ab7fa15d842a417c, type: 3}
+  statistics: {fileID: 0}
+  swimmer: {fileID: 302901561517809881, guid: b6c256594879fd04f806d0f7de802de8, type: 3}
   displayTrackerWarning: 0
+  timerMax: 30
+  gameTimer: 0
+  ui_manager: {fileID: 0}
+--- !u!114 &1025794955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704805175471835411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb4db453fb8fd084e9b5a8e27dbea7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swimmers: []
+  swimPoints: []
+  normalSwimmers: 0
+  weakSwimmers: 0
+  exhaustedSwimmers: 0
+  injuredSwimmers: 0
+--- !u!114 &1025794959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704805175471835411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29eb2ad2385f0404f9fa33008a5b1a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics: {fileID: 0}
