@@ -124,7 +124,7 @@ public class Swimmer : Character // The main NPC that the player will have to sa
         {
             c_renderer.material = patron2; // Patron 2 skin
         }
-        else if (randMaterial >= 67 && randMaterial <= 99)
+        else if (randMaterial >= 67 && randMaterial <= 100)
         {
             c_renderer.material = patron3; // Patron 3 skin
         }
